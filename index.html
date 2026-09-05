@@ -1,10 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myat Hsu Hnin | Cybersecurity Engineer Portfolio</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        header {
+            border-bottom: 2px solid #238636;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 { color: #58a6ff; margin: 0; }
+        h2 { color: #238636; border-bottom: 1px solid #21262d; padding-bottom: 5px; }
+        .tagline { font-size: 1.2rem; color: #8b949e; }
+        .section { margin-bottom: 40px; }
+        .badge {
+            background-color: #21262d;
+            color: #58a6ff;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin: 5px;
+            border: 1px solid #30363d;
+        }
+        .project-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .project-card h3 { margin-top: 0; color: #f0f6fc; }
+        a { color: #58a6ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Website!</h1>
-    <p>This site is hosted using GitHub Pages.</p>
+
+<div class="container">
+    <header>
+        <h1>Myat Hsu Hnin</h1>
+        <p class="tagline">Cybersecurity Engineer | Application Security | Penetration Testing</p>
+        <p>Welcome to my security portfolio. I specialize in identifying vulnerabilities, securing infrastructure, and analyzing threats.</p>
+    </header>
+
+    <div class="section">
+        <h2>🛠️ Technical Skills</h2>
+        <div>
+            <span class="badge">Penetration Testing</span>
+            <span class="badge">SIEM (Splunk / Elastic)</span>
+            <span class="badge">Network Security</span>
+            <span class="badge">Linux / Bash</span>
+            <span class="badge">Python (Automation)</span>
+            <span class="badge">OWASP Top 10</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📜 Certifications</h2>
+        <ul>
+            <li><strong>CompTIA Security+</strong> (or insert your certification here)</li>
+            <li><strong>eJPT / EJPTv2</strong> (Junior Penetration Tester)</li>
+            <li><strong>Certified Ethical Hacker (CEH)</strong></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🚀 Projects & Homelabs</h2>
+        
+        <div class="project-card">
+            <h3>Active Directory Home Lab</h3>
+            <p>Configured a Windows Server environment in VirtualBox to practice attacking and defending Active Directory structures. Simulated Kerberoasting and Pass-the-Hash attacks.</p>
+        </div>
+
+        <div class="project-card">
+            <h3>SOC Automation Playbook</h3>
+            <p>Created a Python script that parses firewall logs automatically, identifies anomalous IP addresses, and cross-references them against the VirusTotal API.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>✍️ Write-ups & CTFs</h2>
+        <p>I document my rooms and challenges to give back to the security community:</p>
+        <ul>
+            <li><a href="#">TryHackMe - [Room Name] Walkthrough</a></li>
+            <li><a href="#">Hack The Box - [Machine Name] Write-up</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📬 Contact</h2>
+        <p>Connect with me on <a href="https://linkedin.com">LinkedIn</a> or check out my tools on <a href="https://github.com">GitHub</a>.</p>
+    </div>
+</div>
+
 </body>
 </html>
