@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity Threat Detection | Myat Hsu Hnin</title>
+    <!-- Official Tailwind CSS v4 CDN for professional, fast rendering -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased py-12 px-4 sm:px-6 lg:px-8">
+
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-xs border border-slate-100">
+        
+        <!-- Navigation Breadcrumb -->
+        <nav class="mb-6 text-sm">
+            <a href="../index.html" class="text-blue-600 hover:text-blue-800 font-semibold">&larr; Back to Portfolio Home</a>
+        </nav>
+
+        <!-- Project Header Section -->
+        <header class="border-b border-slate-100 pb-6 mb-6">
+            <h1 class="text-3xl font-bold tracking-tight text-slate-900">Identity Threat Detection: Defending the Keys to the Kingdom</h1>
+            <p class="text-base font-semibold text-blue-600 mt-1">Focus Area: Threat Detection Engineering, SIEM Analytics, Identity & Access Management (IAM)</p>
+            <div class="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs font-mono text-slate-500 bg-slate-50 p-2 rounded border border-slate-100">
+                <span>🎯 MITRE ATT&CK Matrix: T1078 (Valid Accounts), T1558 (Steal or Modify Authentication Material)</span>
+            </div>
+        </header>
+
+        <!-- Scenario Objective -->
+        <section class="mb-8">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">🚨 Scenario Objective</h2>
+            <p class="text-slate-600 leading-relaxed">
+                An external threat actor successfully establishes an initial foothold on an internal corporate workstation. Rather than launching loud malware, the attacker attempts a stealthy <strong class="text-slate-900">Lateral Movement</strong> strategy, actively hunting for unmanaged administrative credentials and trying to compromise or bypass the centralized <strong class="text-slate-900">CyberArk Privileged Access Management (PAM)</strong> architecture to gain Domain Admin rights.
+            </p>
+            <p class="text-slate-600 leading-relaxed mt-2">
+                This playbook establishes the exact <strong class="text-slate-900">SIEM logic (KQL / SPL)</strong> and log correlation strategies a Security Operations Center (SOC) must deploy to detect and contain this identity-based attack pattern before a total domain compromise occurs.
+            </p>
+        </section>
+
+        <hr class="border-slate-100 my-6">
+
+        <!-- SIEM Correlation & Detection Engineering -->
+        <section class="mb-8">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">🔬 SIEM Correlation & Detection Engineering</h2>
+            <p class="text-slate-600 text-sm mb-4 leading-relaxed">As a Blue Team Analyst, we do not monitor systems in isolation. We correlate boundary logs (Firewall) with host authentication logs (Windows Active Directory) and platform audit logs (CyberArk PAM).</p>
+
+            <div class="space-y-6">
+                <!-- Phase 1 -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 mb-1">Phase 1: Detecting Boundary Reconnaissance (Perimeter Logs)</h3>
+                    <p class="text-xs text-slate-500 mb-2 font-semibold uppercase">Platform: Splunk Search (SPL)</p>
+                    <pre class="bg-slate-900 text-emerald-400 p-4 rounded-lg font-mono text-xs overflow-x-auto border border-slate-800">
+index=firewall action=deny src_zone=outside
+| stats count by src_ip, dest_ip, dest_port
+| where count > 100
+| rename src_ip as Attacker_IP, dest_ip as Targeted_Server</pre>
+                    <p class="text-xs text-slate-600 mt-2"><strong class="text-slate-800">Operational Rationale:</strong> Isolates external public IPs performing heavy port-scanning or service probing against critical internal network segments within a compressed time window.</p>
+                </div>
+
+                <!-- Phase 2 -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 mb-1">Phase 2: Detecting Privilege Escalation via Windows Event IDs</h3>
+                    <p class="text-xs text-slate-500 mb-2 font-semibold uppercase">Platform: Microsoft Sentinel (KQL)</p>
+                    <pre class="bg-slate-900 text-emerald-400 p-4 rounded-lg font-mono text-xs overflow-x-auto border border-slate-800">
+SecurityEvent
+| where EventID in (4625, 4728, 4732)
+| summarize FailedLogins = countif(EventID == 4625), AccountElevations = countif(EventID in (4728, 4732)) by Account, SourceComputer, IpAddress
+| where FailedLogins > 20 or AccountElevations > 0</pre>
+                    <p class="text-xs text-slate-600 mt-2"><strong class="text-slate-800">Operational Rationale:</strong> Tracks sudden, high-volume brute-force attempts (<code class="font-mono bg-slate-100 text-slate-800 px-1 rounded">EventID 4625</code>) or anomalous additions of standard domain accounts into highly privileged security groups (<code class="font-mono bg-slate-100 text-slate-800 px-1 rounded">EventID 4728 / 4732</code>) like Domain Admins.</p>
+                </div>
+
+                <!-- Phase 3 -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 mb-1">Phase 3: Catching the PAM Vault Bypass (CyberArk Audit Logs)</h3>
+                    <p class="text-xs text-slate-500 mb-2 font-semibold uppercase">Platform: Cross-Platform Correlation Logic (KQL)</p>
+                    <pre class="bg-slate-900 text-emerald-400 p-4 rounded-lg font-mono text-xs overflow-x-auto border border-slate-800">
+CyberArkAuditLogs
+| where Action == "Retrieve Password" or Action == "Logon Failed"
+
+| extend IsAdministrativeSafe = TargetSafe matches regex @"(?i)(Domain_Admin|Vault_Admin|Root_Keys)"
+| project TimeGenerated, User, Action, TargetSafe, SourceAddress, IsAdministrativeSafe
+| order by TimeGenerated desc</pre>
+                    <p class="text-xs text-slate-600 mt-2"><strong class="text-slate-800">Operational Rationale:</strong> Instantly triggers a high-severity SOC alert if a password retrieval action occurs on a highly restricted administrative safe (<code class="font-mono bg-slate-100 text-slate-800 px-1 rounded">IsAdministrativeSafe</code>) outside of standard business hours, leveraging real-world environment knowledge to mitigate exposure.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-slate-100 my-6">
+
+        <!-- Incident Response Playbook -->
+        <section class="mb-4">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3">📋 Executive Containment & Response Playbook</h2>
+            <div class="space-y-3 text-sm text-slate-600 leading-relaxed">
+                <p>
+                    <strong class="text-slate-900">1. Triage & Verification:</strong> Cross-check the source IP address against internal enterprise change-management records to verify if an infrastructure team member is performing scheduled operational account onboarding. If unverified, classify immediately as a True Positive event.
+                </p>
+                <p>
+                    <strong class="text-slate-900">2. Host Isolation:</strong> Trigger an immediate endpoint threat response payload to network-isolate the compromised host asset, cutting off active command-and-control connection streams.
+                </p>
+                <p>
+                    <strong class="text-slate-900">3. Credential Revocation & Boundary Lock:</strong> Enforce session termination and password rotations across administrative directory structures, temporarily executing firewall port blocks to isolate administrative cluster nodes.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
