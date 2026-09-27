@@ -4,101 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Identity Threat Detection | Myat Hsu Hnin</title>
-    <!-- Stable Tailwind CSS v3 engine that renders colors perfectly on all browsers -->
-    <script src="https://tailwindcss.com"></script>
+    <!-- Bulma CSS Framework: Traditional CSS style link that renders rich corporate colors without using JavaScript -->
+    <link rel="stylesheet" href="https://jsdelivr.net">
+    <style>
+        body { background-color: #f8fafc; color: #334155; font-family: system-ui, -apple-system, sans-serif; padding: 3rem 1rem; }
+        .portfolio-card { background-color: #ffffff; max-width: 48rem; margin: 0 auto; padding: 2.5rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .back-link { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #155e75; text-decoration: underline; display: inline-block; margin-bottom: 2rem; }
+        .back-link:hover { color: #083344; }
+        .main-title { font-size: 1.75rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; line-height: 1.25; }
+        .subtitle-meta { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-bottom: 1rem; }
+        .matrix-box { font-size: 0.75rem; font-family: monospace; color: #334155; background-color: #f1f5f9; padding: 0.75rem; rounded-radius: 4px; border: 1px solid #cbd5e1; margin-top: 1rem; }
+        .section-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-top: 2rem; margin-bottom: 0.75rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.25rem; }
+        .paragraph-text { font-size: 0.95rem; line-height: 1.6; color: #475569; margin-bottom: 1rem; }
+        .strong-focus { color: #0f172a; font-weight: 600; }
+        .phase-block { border-left: 4px solid #cbd5e1; padding-left: 1rem; margin-bottom: 2rem; }
+        .phase-title { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem; }
+        .platform-tag { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; margin-bottom: 0.5rem; }
+        .terminal-box { background-color: #0f172a; color: #f1f5f9; padding: 1rem; border-radius: 4px; font-family: monospace; font-size: 0.75rem; overflow-x: auto; line-height: 1.5; border: 1px solid #020617; box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); margin: 0.5rem 0; }
+        .rationale-text { font-size: 0.8rem; color: #64748b; mt: 0.5rem; line-height: 1.5; }
+        .rationale-strong { color: #475569; font-weight: 600; }
+        .playbook-step { border-bottom: 1px solid #f1f5f9; padding-bottom: 0.75rem; margin-bottom: 0.75rem; font-size: 0.875rem; }
+        .playbook-step:last-child { border-bottom: none; }
+        .step-heading { color: #0f172a; font-weight: 700; display: block; margin-bottom: 0.125rem; }
+    </style>
 </head>
-<body class="bg-slate-100 text-slate-700 font-sans antialiased py-12 px-4 sm:px-6 lg:px-8">
+<body>
 
-    <div class="max-w-3xl mx-auto bg-white p-8 sm:p-10 rounded-lg shadow-md border border-slate-200">
+    <div class="portfolio-card">
         
         <!-- Navigation Breadcrumb -->
-        <nav class="mb-8">
-            <a href="../index.html" class="text-xs font-bold uppercase tracking-wider text-cyan-800 hover:text-cyan-950 underline transition-colors">&larr; Back to Portfolio Home</a>
+        <nav>
+            <a href="../index.html" class="back-link">&larr; Back to Portfolio Home</a>
         </nav>
 
         <!-- Project Header Section -->
-        <header class="border-b border-slate-200 pb-6 mb-8">
-            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-2">Identity Threat Detection: Defending the Keys to the Kingdom</h1>
-            <p class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-500">Threat Detection Engineering &bull; SIEM Analytics &bull; Identity & Access Management (IAM)</p>
-            <div class="mt-4 text-xs font-mono text-slate-700 bg-slate-50 p-3 rounded border border-slate-200">
-                <span class="font-bold text-slate-900">MITRE ATT&CK Matrix:</span> T1078 (Valid Accounts), T1558 (Steal or Modify Authentication Material)
+        <header>
+            <h1 class="main-title">Identity Threat Detection: Defending the Keys to the Kingdom</h1>
+            <p class="subtitle-meta">Threat Detection Engineering &bull; SIEM Analytics &bull; Identity & Access Management (IAM)</p>
+            <div class="matrix-box">
+                <span class="strong-focus">MITRE ATT&CK Matrix:</span> T1078 (Valid Accounts), T1558 (Steal or Modify Authentication Material)
             </div>
         </header>
 
         <!-- Scenario Objective -->
-        <section class="mb-8">
-            <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Scenario Objective</h2>
-            <p class="leading-relaxed text-slate-600 text-sm sm:text-base">
-                An external threat actor successfully establishes an initial foothold on an internal corporate workstation. Rather than launching disruptive malware, the attacker attempts a stealthy <strong class="text-slate-900 font-semibold">Lateral Movement</strong> strategy, actively hunting for unmanaged administrative credentials and trying to compromise or bypass the centralized <strong class="text-slate-900 font-semibold">CyberArk Privileged Access Management (PAM)</strong> architecture to gain Domain Admin privileges.
+        <section>
+            <h2 class="section-title">Scenario Objective</h2>
+            <p class="paragraph-text">
+                An external threat actor successfully establishes an initial foothold on an internal corporate workstation. Rather than launching disruptive malware, the attacker attempts a stealthy <span class="strong-focus">Lateral Movement</span> strategy, actively hunting for unmanaged administrative credentials and trying to compromise or bypass the centralized <span class="strong-focus">CyberArk Privileged Access Management (PAM)</span> architecture to gain Domain Admin privileges.
             </p>
-            <p class="leading-relaxed text-slate-600 text-sm sm:text-base mt-3">
-                This playbook establishes the exact <strong class="text-slate-900 font-semibold">SIEM logic (KQL / SPL)</strong> and log correlation strategies a Security Operations Center (SOC) must deploy to detect and contain this identity-based attack pattern before a total domain compromise occurs.
+            <p class="paragraph-text">
+                This playbook establishes the exact <span class="strong-focus">SIEM logic (KQL / SPL)</span> and log correlation strategies a Security Operations Center (SOC) must deploy to detect and contain this identity-based attack pattern before a total domain compromise occurs.
             </p>
         </section>
 
-        <hr class="border-slate-200 my-8">
-
         <!-- SIEM Correlation & Detection Engineering -->
-        <section class="mb-8">
-            <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">SIEM Correlation & Detection Engineering</h2>
-            <p class="text-slate-600 text-sm mb-6 leading-relaxed">As a Blue Team Analyst, networks cannot be monitored in isolation. Defensive pipelines require correlating perimeter boundary events (Firewall) with host authentication engines (Windows Active Directory) and centralized vault audit trails (CyberArk PAM).</p>
+        <section>
+            <h2 class="section-title">SIEM Correlation & Detection Engineering</h2>
+            <p class="paragraph-text" style="font-size: 0.875rem;">As a Blue Team Analyst, networks cannot be monitored in isolation. Defensive pipelines require correlating perimeter boundary events (Firewall) with host authentication engines (Windows Active Directory) and centralized vault audit trails (CyberArk PAM).</p>
 
-            <div class="space-y-8">
+            <div style="margin-top: 1.5rem;">
                 <!-- Phase 1 -->
-                <div class="border-l-4 border-slate-300 pl-4">
-                    <h3 class="text-base font-bold text-slate-900 mb-1">Phase 1: Detecting Boundary Reconnaissance (Perimeter Logs)</h3>
-                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Platform: Splunk Search (SPL)</p>
-                    <pre class="bg-slate-900 text-slate-100 p-4 rounded font-mono text-xs overflow-x-auto border border-slate-950 shadow-inner leading-5">index=firewall action=deny src_zone=outside
+                <div class="phase-block">
+                    <h3 class="phase-title">Phase 1: Detecting Boundary Reconnaissance (Perimeter Logs)</h3>
+                    <p class="platform-tag">Platform: Splunk Search (SPL)</p>
+                    <pre class="terminal-box">index=firewall action=deny src_zone=outside
 | stats count by src_ip, dest_ip, dest_port
 | where count > 100
 | rename src_ip as Attacker_IP, dest_ip as Targeted_Server</pre>
-                    <p class="text-xs text-slate-500 mt-2 leading-relaxed"><strong class="text-slate-700 font-semibold">Operational Rationale:</strong> Isolates external public IPs executing high-volume port scanning or rapid service probing against restricted internal network segments within a compressed temporal window.</p>
+                    <p class="rationale-text"><span class="rationale-strong">Operational Rationale:</span> Isolates external public IPs executing high-volume port scanning or rapid service probing against restricted internal network segments within a compressed temporal window.</p>
                 </div>
 
                 <!-- Phase 2 -->
-                <div class="border-l-4 border-slate-300 pl-4">
-                    <h3 class="text-base font-bold text-slate-900 mb-1">Phase 2: Detecting Privilege Escalation via Windows Event IDs</h3>
-                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Platform: Microsoft Sentinel (KQL)</p>
-                    <pre class="bg-slate-900 text-slate-100 p-4 rounded font-mono text-xs overflow-x-auto border border-slate-950 shadow-inner leading-5">SecurityEvent
+                <div class="phase-block">
+                    <h3 class="phase-title">Phase 2: Detecting Privilege Escalation via Windows Event IDs</h3>
+                    <p class="platform-tag">Platform: Microsoft Sentinel (KQL)</p>
+                    <pre class="terminal-box">SecurityEvent
 | where EventID in (4625, 4728, 4732)
 | summarize FailedLogins = countif(EventID == 4625), AccountElevations = countif(EventID in (4728, 4732)) by Account, SourceComputer, IpAddress
 | where FailedLogins > 20 or AccountElevations > 0</pre>
-                    <p class="text-xs text-slate-500 mt-2 leading-relaxed"><strong class="text-slate-700 font-semibold">Operational Rationale:</strong> Tracks anomalous, high-frequency authentication failures (<code class="font-mono bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded text-xs border border-slate-200">EventID 4625</code>) or unauthorized modifications to sensitive domain security configurations (<code class="font-mono bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded text-xs border border-slate-200">EventID 4728 / 4732</code>) indicative of account hijacking.</p>
+                    <p class="rationale-text"><span class="rationale-strong">Operational Rationale:</span> Tracks anomalous, high-frequency authentication failures (EventID 4624/4625 mapping tracks) or unauthorized modifications to sensitive domain security configurations (Group additions) indicative of account hijacking.</p>
                 </div>
 
                 <!-- Phase 3 -->
-                <div class="border-l-4 border-slate-300 pl-4">
-                    <h3 class="text-base font-bold text-slate-900 mb-1">Phase 3: Catching the PAM Vault Bypass (CyberArk Audit Logs)</h3>
-                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Platform: Cross-Platform Correlation Logic (KQL)</p>
-                    <pre class="bg-slate-900 text-slate-100 p-4 rounded font-mono text-xs overflow-x-auto border border-slate-950 shadow-inner leading-5">CyberArkAuditLogs
+                <div class="phase-block">
+                    <h3 class="phase-title">Phase 3: Catching the PAM Vault Bypass (CyberArk Audit Logs)</h3>
+                    <p class="platform-tag">Platform: Cross-Platform Correlation Logic (KQL)</p>
+                    <pre class="terminal-box">CyberArkAuditLogs
 | where Action == "Retrieve Password" or Action == "Logon Failed"
 
 | extend IsAdministrativeSafe = TargetSafe matches regex @"(?i)(Domain_Admin|Vault_Admin|Root_Keys)"
 | project TimeGenerated, User, Action, TargetSafe, SourceAddress, IsAdministrativeSafe
 | order by TimeGenerated desc</pre>
-                    <p class="text-xs text-slate-500 mt-2 leading-relaxed"><strong class="text-slate-700 font-semibold">Operational Rationale:</strong> Instantly isolates credential retrieval queries executed against highly critical root directories (<code class="font-mono bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded text-xs border border-slate-200">IsAdministrativeSafe</code>) outside regular operating baselines, bridging infrastructure operations directly into alerting logic.</p>
+                    <p class="rationale-text"><span class="rationale-strong">Operational Rationale:</span> Instantly isolates credential retrieval queries executed against highly critical root directories (Administrative Safes) outside regular operating baselines, bridging infrastructure operations directly into alerting logic.</p>
                 </div>
             </div>
         </section>
 
-        <hr class="border-slate-200 my-8">
-
         <!-- Incident Response Playbook -->
-        <section class="mb-2">
-            <h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Executive Containment & Response Playbook</h2>
-            <div class="space-y-4 text-sm text-slate-600 leading-relaxed">
-                <div class="pb-3 border-b border-slate-100">
-                    <strong class="text-slate-900 block mb-0.5 font-bold">1. Triage & Verification</strong>
-                    Cross-check the triggering source IP metrics against change-management database layers to isolate scheduled asset onboarding actions. If unverified, declare a True Positive event.
-                </div>
-                <div class="pb-3 border-b border-slate-100">
-                    <strong class="text-slate-900 block mb-0.5 font-bold">2. Host Isolation</strong>
-                    Issue a centralized EDR instruction to network-isolate the compromised host node immediately, severing the attacker's interactive command-and-control connection lines.
-                </div>
-                <div>
-                    <strong class="text-slate-900 block mb-0.5 font-bold">3. Boundary Lockdown</strong>
-                    Force an immediate session termination and credential rotation sequence across identified accounts, deploying emergency host blocks across adjacent network nodes.
-                </div>
+        <section style="margin-top: 2.5rem;">
+            <h2 class="section-title">Executive Containment & Response Playbook</h2>
+            
+            <div class="playbook-step">
+                <span class="step-heading">1. Triage & Verification</span>
+                Cross-check the triggering source IP metrics against change-management database layers to isolate scheduled asset onboarding actions. If unverified, declare a True Positive event.
+            </div>
+            
+            <div class="playbook-step">
+                <span class="step-heading">2. Host Isolation</span>
+                Issue a centralized EDR instruction to network-isolate the compromised host node immediately, severing the attacker's interactive command-and-control connection lines.
+            </div>
+            
+            <div class="playbook-step">
+                <span class="step-heading">3. Boundary Lockdown</span>
+                Force an immediate session termination and credential rotation sequence across identified accounts, deploying emergency host blocks across adjacent network nodes.
             </div>
         </section>
 
