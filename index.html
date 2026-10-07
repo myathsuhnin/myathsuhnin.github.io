@@ -1,110 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myat Hsu Hnin | Cyber Threat Analyst Portfolio</title>
-    <!-- Official Tailwind CSS v4 CDN for professional, fast rendering -->
-    <script src="https://jsdelivr.net"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Myat Hsu Hnin | Cybersecurity Engineer</title>
+<meta name="description" content="Myat Hsu Hnin, Cybersecurity Engineer in Bangkok moving from enterprise infrastructure and identity security into Blue Team / SOC work.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d1322;
+    --panel: #151d33;
+    --line: #26314d;
+    --text: #e7ebf6;
+    --muted: #9aa6c2;
+    --accent: #8796ff;
+    --alert: #ffb347;
+    --ok: #5ee0b0;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    background-image: radial-gradient(900px 500px at 85% -10%, rgba(135,150,255,.18), transparent 60%);
+    background-repeat: no-repeat;
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--alert); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(13,19,34,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+  .brand { font-family: var(--display); font-weight: 700; text-decoration: none; }
+  nav ul { list-style: none; padding: 0; display: flex; gap: 22px; font-size: .92rem; color: var(--muted); }
+  nav ul a { text-decoration: none; }
+  nav ul a:hover { color: var(--text); }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; padding: 88px 0 72px; }
+  .hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1.02; letter-spacing: -.03em; }
+  .role { font-family: var(--display); font-size: 1.5rem; font-weight: 500; color: var(--accent); margin-top: 14px; }
+  .lede { color: var(--muted); max-width: 46ch; margin-top: 20px; font-size: 1.05rem; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 22px; font-size: .92rem; color: var(--muted); }
+  .meta a { text-decoration: underline; text-underline-offset: 3px; }
+  .meta a:hover { color: var(--text); }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .btn { display: inline-block; padding: 12px 22px; border-radius: 8px; font-weight: 600; text-decoration: none; border: 1px solid var(--line); transition: transform .15s, background .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--accent); color: #0d1322; border-color: var(--accent); }
+  .btn.primary:hover { background: #a3afff; }
+  .btn.ghost:hover { background: var(--panel); }
+
+  /* Live detection feed (the one animated moment) */
+  .feed { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  .feed-bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  .feed-body { padding: 16px; font-family: var(--mono); font-size: .8rem; min-height: 270px; line-height: 1.7; }
+  .row { display: flex; gap: 10px; opacity: 0; transform: translateY(4px); animation: in .3s forwards; white-space: nowrap; overflow: hidden; }
+  .row .t { color: #5d6b8c; }
+  .row .ok { color: var(--ok); }
+  .row .warn { color: var(--alert); }
+  .alert { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--alert); border-radius: 8px; background: rgba(255,179,71,.08); color: var(--alert); white-space: normal; font-family: var(--body); font-size: .88rem; line-height: 1.5; }
+  .alert strong { display: block; font-family: var(--mono); font-size: .8rem; }
+  @keyframes in { to { opacity: 1; transform: none; } }
+
+  /* Sections */
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 { font-family: var(--display); font-size: 1.9rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 28px; }
+  .strengths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .strengths h3 { font-family: var(--display); font-size: 1.1rem; margin-bottom: 8px; }
+  .strengths p { color: var(--muted); font-size: .95rem; }
+  .strengths div { border-left: 3px solid var(--accent); padding-left: 16px; }
+  .strengths div:nth-child(2) { border-color: var(--alert); }
+  .strengths div:nth-child(3) { border-color: var(--ok); }
+
+  .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 16px; }
+  .job-head h3 { font-family: var(--display); font-size: 1.25rem; }
+  .job-head span { color: var(--muted); font-size: .95rem; }
+  .sub { color: var(--accent); font-size: .92rem; margin: 2px 0 14px; }
+  .job ul { padding-left: 20px; color: var(--muted); max-width: 75ch; }
+  .job li { margin-bottom: 10px; }
+  .job li b { color: var(--text); font-weight: 600; }
+
+  .creds { list-style: none; padding: 0; display: grid; gap: 14px; max-width: 760px; }
+  .creds li { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .creds small { display: block; color: var(--muted); font-size: .88rem; }
+  .tag { font-family: var(--mono); font-size: .75rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+  .tag.done { color: var(--ok); border-color: rgba(94,224,176,.45); }
+  .tag.prog { color: var(--alert); border-color: rgba(255,179,71,.45); }
+
+  .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .project { background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; transition: transform .2s, border-color .2s; }
+  .project:hover { transform: translateY(-4px); }
+  .project:nth-child(2) { border-top-color: var(--alert); }
+  .project:nth-child(3) { border-top-color: var(--ok); }
+  .project h3 { font-family: var(--display); font-size: 1.15rem; line-height: 1.3; margin-bottom: 10px; }
+  .project p { color: var(--muted); font-size: .92rem; flex: 1; }
+  .project code { font-family: var(--mono); font-size: .85em; color: var(--text); }
+  .project a { margin-top: 18px; font-weight: 600; font-size: .92rem; color: var(--accent); text-decoration: none; }
+  .project a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: .9rem; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding-top: 56px; gap: 40px; }
+    .strengths, .projects { grid-template-columns: 1fr; }
+    nav ul { gap: 14px; }
+  }
+  @media (max-width: 480px) { nav ul li:nth-child(n+3) { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .row { animation: none; opacity: 1; transform: none; }
+    .btn, .project { transition: none; }
+  }
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased py-12 px-4 sm:px-6 lg:px-8">
+<body>
 
-    <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-xs border border-slate-100">
-        
-        <!-- Header Section -->
-        <header class="border-b border-slate-100 pb-6 mb-6">
-            <h1 class="text-3xl font-bold tracking-tight text-slate-900">Myat Hsu Hnin</h1>
-            <p class="text-lg font-semibold text-blue-600 mt-1">Cybersecurity Engineer</p>
-            <div class="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-500">
-                <span class="flex items-center"> Bangkok, Thailand</span>
-                <a href="https://github.com" target="_blank" class="hover:text-blue-600 underline"> ://github.com</a>
-                <a href="https://linkedin.com" target="_blank" class="hover:text-blue-600 underline"> ://linkedin.com</a>
-            </div>
-        </header>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Myat Hsu Hnin</a>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </div>
+</nav>
 
-        <!-- Professional Profile -->
-        <section class="mb-8">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">⚡ Professional Profile</h2>
-            <p class="text-slate-600 leading-relaxed">
-                <strong class="text-slate-900">Result-driven Cyber Security professional</strong> transitioning 2 years of full-time enterprise infrastructure and Identity Operations experience into pure <strong class="text-slate-900">Blue Team / Security Operations (SOC)</strong>. Combines a rigorous Computer Science foundation with a certified, analytical mindset to detect, analyze, and remediate advanced enterprise system threats.
-            </p>
-        </section>
+<main class="wrap" id="top">
 
-        <hr class="border-slate-100 my-6">
-
-        <!-- Core Strengths -->
-        <section class="mb-8">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Core Strengths & Technical Edge</h2>
-            <ul class="space-y-2 text-slate-600 list-disc pl-5 leading-relaxed">
-                <li><strong class="text-slate-900">Infrastructure-Aware Defenses:</strong> Deep, practical understanding of enterprise architecture, network topologies, and firewall boundary controls.</li>
-                <li><strong class="text-slate-900">Identity & Access Triage:</strong> 2 years of corporate experience managing enterprise privilege boundaries; uniquely equipped to detect lateral movement, credential dumping, and privilege escalation vectors.</li>
-                <li><strong class="text-slate-900">Threat Analysis Mindset:</strong> Proven competency in parsing multi-system logs, constructing incident timelines, and executing root-cause containment.</li>
-            </ul>
-        </section>
-
-        <hr class="border-slate-100 my-6">
-
-        <!-- Professional Experience -->
-        <section class="mb-8">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Professional Experience</h2>
-            <div>
-                <div class="flex justify-between items-baseline flex-wrap gap-2">
-                    <h3 class="text-base font-bold text-slate-900">Infrastructure Security Engineer (Full-Time)</h3>
-                    <span class="text-sm font-semibold text-slate-500">2 Years</span>
-                </div>
-                <p class="text-xs font-medium text-slate-400 uppercase tracking-tight mt-0.5 mb-2">Enterprise Corporate Environment</p>
-                <ul class="space-y-2 text-slate-600 text-sm list-disc pl-5 leading-relaxed">
-                    <li><strong class="text-slate-800">Privileged Access Architecture:</strong> Maintained core components and server infrastructure for enterprise-grade <strong class="text-slate-800">CyberArk PAM</strong>, systematically mitigating credential exposure risks and enforcing Least Privilege boundaries.</li>
-                    <li><strong class="text-slate-800">Firewall Operations & Log Analysis:</strong> Managed corporate firewall implementations; monitored network traffic profiles and audited connectivity logs to maintain operational security boundaries.</li>
-                    <li><strong class="text-slate-800">Enterprise Incident Readiness:</strong> Spearheaded systems troubleshooting pipelines and coordinated cross-functional technical project meetings to align infrastructure changes with security parameters.</li>
-                </ul>
-            </div>
-        </section>
-
-        <hr class="border-slate-100 my-6">
-
-        <!-- Education & Credentials -->
-        <section class="mb-8">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Education & Credentials</h2>
-            <ul class="space-y-2 text-slate-600 text-sm list-disc pl-5 leading-relaxed">
-                <li><strong class="text-slate-900">B.Sc. in Computer Science</strong> – University of the People <span class="text-emerald-600 font-medium bg-emerald-50 px-1.5 py-0.5 rounded text-xs ml-1">Graduated (Aug 2026)</span></li>
-                <li><strong class="text-slate-900">B-Tech in Information and Communication Technology</strong> – Krirk University, Bangkok <span class="text-slate-400 font-normal ml-1">(In Progress / Academic Internship Track)</span></li>
-                <li><strong class="text-slate-900">Blue Team Junior Analyst (BTJA)</strong> – Security Blue Team <span class="text-slate-400 font-normal ml-1">(Credential Completed)</span></li>
-                <li><strong class="text-slate-900">Practical SOC Analyst Associate (PSAA)</strong> – TCM Security <span class="text-blue-600 font-medium bg-blue-50 px-1.5 py-0.5 rounded text-xs ml-1">In Progress / Target Certification</span></li>
-            </ul>
-        </section>
-
-        <hr class="border-slate-100 my-6">
-
-        <!-- Practical Projects -->
-        <section>
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4"> Practical Blue Team Projects</h2>
-            
-            <div class="space-y-4">
-                <!-- Project 1 -->
-                <div class="p-5 bg-slate-50 rounded-lg border border-slate-100 hover:border-slate-200 transition-colors">
-                    <h3 class="text-base font-bold text-slate-900 mb-1">1. Identity Threat Detection: Defending the Keys to the Kingdom</h3>
-                    <p class="text-sm text-slate-600 mb-3 leading-relaxed">Correlating Active Directory Kerberoasting metrics with anomalous CyberArk component access logs to identify lateral movement and privilege escalation attempts before domain compromise occurs.</p>
-                    <a href="./projects/pam-detection.html" class="text-xs font-bold text-blue-600 hover:text-blue-800 inline-flex items-center gap-1">View Technical Framework &rarr;</a>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="p-5 bg-slate-50 rounded-lg border border-slate-100 hover:border-slate-200 transition-colors">
-                    <h3 class="text-base font-bold text-slate-900 mb-1">2. Network Forensics: Malicious Traffic & Packet Analysis</h3>
-                    <p class="text-sm text-slate-600 mb-3 leading-relaxed">Utilizing Wireshark to dissect malicious packet captures (`.pcap`) from BTLO and CyberDefenders challenges, mapping out an investigative timeline of web shell uploads and SQL injection tracks.</p>
-                    <a href="./projects/network-forensics.html" class="text-xs font-bold text-blue-600 hover:text-blue-800 inline-flex items-center gap-1">View Incident Write-up &rarr;</a>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="p-5 bg-slate-50 rounded-lg border border-slate-100 hover:border-slate-200 transition-colors">
-                    <h3 class="text-base font-bold text-slate-900 mb-1">3. Endpoint Triage & Phishing Incident Response</h3>
-                    <p class="text-sm text-slate-600 mb-3 leading-relaxed">Parsing raw corporate email headers, sandboxing malicious macro attachments to discover external Command & Control (C2) servers, and deploying defensive firewall blocklists.</p>
-                    <a href="./projects/phishing-triage.html" class="text-xs font-bold text-blue-600 hover:text-blue-800 inline-flex items-center gap-1">View Incident Report &rarr;</a>
-                </div>
-            </div>
-        </section>
-
+  <!-- Hero -->
+  <header class="hero">
+    <div>
+      <h1>Myat Hsu Hnin</h1>
+      <p class="role">Cybersecurity Engineer</p>
+      <p class="lede">Two years running enterprise infrastructure and privileged access, now moving into Blue Team and SOC work: finding the attacker in the logs before the domain falls.</p>
+      <div class="meta">
+        <span>Bangkok, Thailand</span>
+        <!-- Replace YOUR-USERNAME and YOUR-PROFILE with your real handles -->
+        <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener">Get in touch</a>
+      </div>
     </div>
 
+    <div class="feed" role="img" aria-label="Animated example of a detection: a Kerberoasting attempt flagged in authentication logs">
+      <div class="feed-bar"><span class="dot"></span> auth-logs / live triage</div>
+      <div class="feed-body" id="feed"></div>
+    </div>
+  </header>
+
+  <!-- Profile -->
+  <section id="profile">
+    <h2>Professional profile</h2>
+    <p style="max-width:70ch;color:var(--muted)">
+      <strong style="color:var(--text)">Results-driven cybersecurity professional</strong> turning two years of full-time enterprise infrastructure and identity operations experience into
+      <strong style="color:var(--text)">Blue Team / Security Operations</strong> work. A Computer Science foundation and hands-on analyst training help me detect, analyze and remediate threats in enterprise systems.
+    </p>
+  </section>
+
+  <!-- Strengths -->
+  <section>
+    <h2>What I bring</h2>
+    <div class="strengths">
+      <div>
+        <h3>Infrastructure-aware defense</h3>
+        <p>Practical knowledge of enterprise architecture, network topologies and firewall boundary controls.</p>
+      </div>
+      <div>
+        <h3>Identity and access triage</h3>
+        <p>Two years managing enterprise privilege boundaries, so I know what lateral movement, credential dumping and privilege escalation look like.</p>
+      </div>
+      <div>
+        <h3>Threat analysis</h3>
+        <p>Parsing logs across systems, building incident timelines and finding the root cause so containment sticks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="job">
+      <div class="job-head">
+        <h3>Infrastructure Security Engineer (Full-Time)</h3>
+        <span>2 years</span>
+      </div>
+      <p class="sub">Enterprise corporate environment</p>
+      <ul>
+        <li><b>Privileged access architecture:</b> maintained core components and servers for enterprise <b>CyberArk PAM</b>, reducing credential exposure and enforcing least privilege.</li>
+        <li><b>Firewall operations and log analysis:</b> managed corporate firewalls, monitored traffic profiles and audited connectivity logs.</li>
+        <li><b>Incident readiness:</b> led troubleshooting and ran cross-team technical meetings so infrastructure changes met security requirements.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Credentials -->
+  <section id="credentials">
+    <h2>Education and credentials</h2>
+    <ul class="creds">
+      <li>
+        <div>B.Sc. in Computer Science<small>University of the People</small></div>
+        <span class="tag done">Graduated Aug 2026</span>
+      </li>
+      <li>
+        <div>B-Tech in Information and Communication Technology<small>Krirk University, Bangkok</small></div>
+        <span class="tag prog">In progress · internship track</span>
+      </li>
+      <li>
+        <div>Blue Team Junior Analyst (BTJA)<small>Security Blue Team</small></div>
+        <span class="tag done">Completed</span>
+      </li>
+      <li>
+        <div>Practical SOC Analyst Associate (PSAA)<small>TCM Security</small></div>
+        <span class="tag prog">In progress</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Blue Team projects</h2>
+    <div class="projects">
+      <article class="project">
+        <h3>Identity threat detection: defending the keys to the kingdom</h3>
+        <p>Correlating Active Directory Kerberoasting metrics with unusual CyberArk component access logs to catch lateral movement and privilege escalation before domain compromise.</p>
+        <a href="./projects/pam-detection.html">View technical framework &rarr;</a>
+      </article>
+      <article class="project">
+        <h3>Network forensics: malicious traffic and packet analysis</h3>
+        <p>Using Wireshark on malicious <code>.pcap</code> files from BTLO and CyberDefenders challenges to build a timeline of web shell uploads and SQL injection.</p>
+        <a href="./projects/network-forensics.html">View incident write-up &rarr;</a>
+      </article>
+      <article class="project">
+        <h3>Endpoint triage and phishing incident response</h3>
+        <p>Parsing raw email headers, sandboxing malicious macro attachments to find external command-and-control servers, and deploying firewall blocklists.</p>
+        <a href="./projects/phishing-triage.html">View incident report &rarr;</a>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">&copy; 2026 Myat Hsu Hnin · Bangkok, Thailand</div>
+</footer>
+
+<script>
+  // One page-load moment: a short detection plays out in the live feed.
+  (function () {
+    var feed = document.getElementById('feed');
+    var lines = [
+      ['09:14:02', 'ok', 'AUTH', 'jlee logon OK from WS-114'],
+      ['09:14:09', 'ok', 'AUTH', 'mkim logon OK from WS-032'],
+      ['09:14:31', 'warn', 'KRB ', 'TGS request: svc_sql (RC4)'],
+      ['09:14:31', 'warn', 'KRB ', 'TGS request: svc_backup (RC4)'],
+      ['09:14:32', 'warn', 'KRB ', 'TGS request: svc_cyberark (RC4)'],
+      ['09:14:32', 'warn', 'KRB ', '47 service tickets in 6s, one host']
+    ];
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function addLine(l, i) {
+      var d = document.createElement('div');
+      d.className = 'row';
+      if (!reduce) d.style.animationDelay = (i * 0.45) + 's';
+      d.innerHTML = '<span class="t">' + l[0] + '</span><span class="' + l[1] + '">' + l[2] + '</span><span>' + l[3] + '</span>';
+      feed.appendChild(d);
+    }
+    lines.forEach(addLine);
+
+    var a = document.createElement('div');
+    a.className = 'alert row';
+    if (!reduce) a.style.animationDelay = (lines.length * 0.45 + 0.4) + 's';
+    a.innerHTML = '<strong>ALERT · Possible Kerberoasting</strong>Unusual burst of service ticket requests with weak encryption from one workstation. Escalate, isolate the host, review the accounts targeted.';
+    feed.appendChild(a);
+  })();
+</script>
 </body>
 </html>
